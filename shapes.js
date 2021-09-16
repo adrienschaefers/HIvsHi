@@ -29,10 +29,14 @@ const renderer = Render.create({
 
 
 const createShape = function (x, y) {
-    return Bodies.circle(x, y, 20 + 20 * Math.random(), {
+    return Bodies.rectangle(x, y, 38, 50, {
        
         render : {
-            fillStyle: "red"
+            sprite : {
+                texture : "outline-2x.png", 
+                xScale: 0.5,
+                yScale: 0.5,
+            }
         }
     })
 }
@@ -67,7 +71,7 @@ const mouseControl = MouseConstraint.create(engine, {
     }
 })
 
-const initialShapes = Composites.stack(50, 50, 15, 5, 40, 40, function(x,y){
+const initialShapes = Composites.stack(50, 50, 100, 5, 40, 40, function(x,y){
     return createShape(x, y)
 })
 
