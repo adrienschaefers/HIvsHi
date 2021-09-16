@@ -5,7 +5,7 @@
 //alias is a shortcut to make our code cleaner
 // const Engine = Matter.Engine
 // const Render = Matter.Render
-const {Engine, Render, Bodies, World} = Matter
+const {Engine, Render, Bodies, World, MouseConstraint} = Matter
 
 //Where matter is deployed
 const sectionTag = document.querySelector("section.shapes")
@@ -58,6 +58,15 @@ const ceiling = Bodies.rectangle(w / 2, - 50, w + 100, 100, wallOptions)
 const leftWall = Bodies.rectangle(-50, h / 2, 100, h + 100, wallOptions)
 const rightWall = Bodies.rectangle(w + 50, h / 2, 100, h + 100, wallOptions)
 
+const mouseControl = MouseConstraint.create(engine, {
+    element: sectionTag, 
+    constraint : {
+        render : {
+            visible : false,
+        }
+    }
+})
+
 
 
 //ajout la variable dans le canvas
@@ -67,6 +76,7 @@ World.add(engine.world, [
     ceiling,
     rightWall,
     leftWall,
+    mouseControl,
 ])
 
 
