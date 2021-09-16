@@ -7,7 +7,7 @@
 // const Render = Matter.Render
 const {Engine, Render, Bodies, World} = Matter
 
-//Where matter us deployed
+//Where matter is deployed
 const sectionTag = document.querySelector("section.shapes")
 
 const h = window.innerHeight;
@@ -29,13 +29,30 @@ const renderer = Render.create({
 
 
 const createShape = function (x, y) {
-    return Bodies.circle(x, y, 20 + 20 * Math.random())
+    return Bodies.circle(x, y, 20 + 20 * Math.random(), {
+       
+        render : {
+            fillStyle: "red"
+        }
+    })
 }
+
+const bigBall = Bodies.circle(w / 2, h / 2, 250, {
+    isStatic : true,
+    render : {
+        fillStyle : "#FFFFFF"
+    }
+})
+//ajout la variable dans le canvas
+World.add(engine.world, bigBall)
+
+
 
 //wehn we click the page add a new shape
 
 document.addEventListener("click", function(event) {
     const shape = createShape(event.pageX, event.pageY)
+//ajout la variable dans le canvas
     World.add(engine.world, shape)
 })
 
