@@ -43,8 +43,19 @@ const bigBall = Bodies.circle(w / 2, h / 2, 250, {
         fillStyle : "#FFFFFF"
     }
 })
+
+const ground = Bodies.rectangle(w / 2, h + 50, w + 100, 100, {
+    isStatic : true,
+    render : {
+        visible : false
+    }
+})
+
+
+
+
 //ajout la variable dans le canvas
-World.add(engine.world, bigBall)
+World.add(engine.world, [bigBall, ground])
 
 
 
