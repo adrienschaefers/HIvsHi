@@ -5,7 +5,7 @@
 //alias is a shortcut to make our code cleaner
 // const Engine = Matter.Engine
 // const Render = Matter.Render
-const {Engine, Render, Bodies, World, MouseConstraint, Composites} = Matter
+const {Engine, Render, Bodies, World, MouseConstraint, Composites, Query} = Matter
 
 //Where matter is deployed
 const sectionTag = document.querySelector("section.shapes")
@@ -33,7 +33,7 @@ const createShape = function (x, y) {
        
         render : {
             sprite : {
-                texture : "outline-2x.png", 
+                texture : "ball.png", 
                 xScale: 0.5,
                 yScale: 0.5,
             }
@@ -55,7 +55,6 @@ const wallOptions = {
         visible: false
     }
 }
-
 
 const ground = Bodies.rectangle(w / 2, h +50,  w + 100, 100, wallOptions)
 const ceiling = Bodies.rectangle(w / 2, - 50, w + 100, 100, wallOptions)
@@ -97,8 +96,19 @@ document.addEventListener("click", function(event) {
 })
 
 
+// When we move our mouse, check matter for any collection
+// Does the mouse touch a body
+
+document.addEventListener("mousemove", function(event){
+    const vector = { x : event.pageX, y : event.pageY,}
+    const hoveredShapes = Query.point(initialShapes.bodies, vector)
 
 
+    hoveredShapes.forEach (shape => {
+        shape.render.sprite = null
+        shape.render.fillStyle  =  "red"
+    })
+})
 
 
 
