@@ -5,7 +5,7 @@
 //alias is a shortcut to make our code cleaner
 // const Engine = Matter.Engine
 // const Render = Matter.Render
-const {Engine, Render, Bodies, World, MouseConstraint} = Matter
+const {Engine, Render, Bodies, World, MouseConstraint, Composites} = Matter
 
 //Where matter is deployed
 const sectionTag = document.querySelector("section.shapes")
@@ -67,7 +67,9 @@ const mouseControl = MouseConstraint.create(engine, {
     }
 })
 
-
+const initialShapes = Composites.stack(50, 50, 15, 5, 40, 40, function(x,y){
+    return createShape(x, y)
+})
 
 //ajout la variable dans le canvas
 World.add(engine.world, [
@@ -77,6 +79,7 @@ World.add(engine.world, [
     rightWall,
     leftWall,
     mouseControl,
+    initialShapes,
 ])
 
 
