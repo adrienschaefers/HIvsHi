@@ -41,7 +41,7 @@ const createShape = function (x, y) {
     })
 }
 
-const bigBall = Bodies.circle(w / 2, h / 2, 250, {
+const bigBall = Bodies.circle(w / 2, h / 2, Math.min(w/4, h/4), {
     isStatic : true,
     render : {
         fillStyle : "#FFFFFF"
@@ -122,14 +122,19 @@ Engine.run(engine)
 Render.run(renderer)
 
 
-let time = 0
-const changeGravity = function(){
-    time = time + 0.01
+// let time = 0
+// const changeGravity = function(){
+//     time = time + 0.01
 
-    engine.world.gravity.x = Math.sin(time)
-    engine.world.gravity.y = Math.cos(time)
+//     engine.world.gravity.x = Math.sin(time)
+//     engine.world.gravity.y = Math.cos(time)
 
-    requestAnimationFrame(changeGravity)
-}
+//     requestAnimationFrame(changeGravity)
+// }
 
-changeGravity()
+// changeGravity()
+
+window.addEventListener("deviceorientation", function(event){
+    engine.world.gravity.y = event.beta / 30
+    engine.world.gravity.x = event.gamma / 30
+})
