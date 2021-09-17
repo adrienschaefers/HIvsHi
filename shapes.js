@@ -33,7 +33,7 @@ const createShape = function (x, y) {
        
         render : {
             sprite : {
-                texture : "ball.png", 
+                texture : "outline.png", 
                 xScale: 0.5,
                 yScale: 0.5,
             }
@@ -120,3 +120,16 @@ document.addEventListener("mousemove", function(event){
 //run both the engine and the renderer
 Engine.run(engine)
 Render.run(renderer)
+
+
+let time = 0
+const changeGravity = function(){
+    time = time + 0.01
+
+    engine.world.gravity.x = Math.sin(time)
+    engine.world.gravity.y = Math.cos(time)
+
+    requestAnimationFrame(changeGravity)
+}
+
+changeGravity()
